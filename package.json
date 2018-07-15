@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/wingkong1978/child_homework#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "multiparty": "^4.1.4",
+    "serve-favicon": "^2.5.0"
   }
 }
