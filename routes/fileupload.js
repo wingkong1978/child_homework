@@ -5,7 +5,9 @@ const router = express.Router();
 const util = require('util');
 //编写执行函数
 router.post('/', function(req, res, next) {
-  var form = new multiparty.Form();
+  var form = new multiparty.Form({
+
+  });
 
   form.parse(req, function(err, fields, files) {
     if (err) {

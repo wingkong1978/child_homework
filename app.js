@@ -13,6 +13,8 @@ var index = require('./routes/index');
 // var edit = require('./routes/edit');
 // var del = require('./routes/del');
 var fileupload = require('./routes/fileupload');
+var teacher = require('./routes/teacher');
+var users = require('./routes/users');
 var app = express();
 
 // 模板开始
@@ -34,6 +36,8 @@ app.use('/testupload', (req,res)=>{
   res.render('testupload.html');
 });
 app.use('/fileupload', fileupload);
+app.use('/teachers', teacher);
+app.use('/users', users);
 // app.use('/search', users);//查
 // app.use('/add', add);//增
 // app.use('/edit', edit);//改
