@@ -37,7 +37,9 @@ router.post('/', function(req, res, next) {
 
     let data = pc.decryptData(encryptedData, iv);
 
-    res.json(data
+    res.json({
+      data:data
+      }
     );
   });
 });
