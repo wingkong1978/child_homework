@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   // res.send( (new teacher()).login_q());
 });
 router.post('/', function(req, res, next) {
-  console.log("post user",req);
+  console.log("post user");
 
   res.send( req.params);
 });

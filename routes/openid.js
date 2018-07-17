@@ -10,9 +10,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   let parms = req.body;
 
-  let parmsO = AppTools.s2o(parms);
-
-  let code = parmsO.code;
+  let code = parms.code;
 
   let appid = "wx5a6711ff1b8896b9";
   let secret = "a21794d4670f247ab5215a30f6b2092b";
