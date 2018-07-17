@@ -14,13 +14,12 @@ router.post('/', function(req, res, next) {
 
   let code = parms.code;
 
-  const sha1 = require("sha1");
   let appid = "wx5a6711ff1b8896b9";
   let secret = "a21794d4670f247ab5215a30f6b2092b";
 //"https://api.weixin.qq.com/sns/jscode2session?appid=$appid&secret=$secret&js_code=$code&grant_type=authorization_code";
 
 
-  let { encryptedData, iv, js_code, rawData, signature } = req.body;
+  let { encryptedData, iv  } = req.body;
 //  {web_host,method="POST",path="/",port="80",content_type='application/json; charset=UTF-8',timeout=4000} = config;
   let config = {
 
