@@ -1,4 +1,4 @@
-const DBMysql = require("../_biz/DBMysql");
+const DBMysql = require("../_biz/DbMysql");
 class users extends DBMysql{
   constructor(){
     super();
