@@ -18,7 +18,7 @@ class AppTools {
       http = require('http');
     }
 		//发送 http Post 请求
-		var postData = this.o2s(data);
+		var postData = AppTools.o2s(data);
 		var options = {
 			hostname: web_host,
 			method: method,
@@ -40,7 +40,7 @@ class AppTools {
 				if(content_type == "application/xml; charset=UTF-8")
 					dfe.resolve(res_data);
 				else
-					dfe.resolve(this.s2o(res_data));
+					dfe.resolve(AppTools.s2o(res_data));
 			});
 		});
 		req.on('error', function(err) {
