@@ -1,29 +1,11 @@
-module.exports = function(Application) {
-	const {
-		Q,fs,os,logger,stackInfo,server_id,log4js
-		,o2s,s2o,devlog,isEmpty,isOK,getTimeStr,quicklog
-		,loadLgc,loadBiz,loadBizCls,
-	}=Application;
-	
-	function writeOperLog(oper_id,oper_type,oper_ip,oper_content){
-		let ormInfo = {
-			'opl_oper_id':oper_id,
-			'opl_type':oper_type,
-			'opl_ip':oper_ip,
-			'opl_content':oper_content,
-		};
 
-		return loadBiz('BizOperLog').insert(ormInfo,true);
-	}
+const Q = require("q");
+class AppTools {
 
-	function writeAppLog(message,level){
-		let Applog = new (require('./_api/ApiLog'))(Application);
-		Applog.info = stackInfo();
-		Applog.filename = 'DateTime';
-		Applog.write(message,level);
-	}
 
-	function checkVerify(_val, _role_str) {
+  static o2s(o){try{return JSON.stringify(o);}catch(ex){}};
+  static s2o(s){try{return(new Function('return '+s))()}catch(ex){}};
+	static checkVerify(_val, _role_str) {
 		if (_role_str.indexOf('require') == -1 && !_val)
 			return true;
 		var _roles = _role_str.split(',');
@@ -89,17 +71,17 @@ module.exports = function(Application) {
 		return _sts;
 	}
 
-	function getTimeStrExt(time, format = "YYYY-MM-DD HH:mm:ss.SSS") {
+	static getTimeStrExt(time, format = "YYYY-MM-DD HH:mm:ss.SSS") {
 		if (!time || time=='NULL' || time=='null' || time=='undefined' || time=="0000-00-00 00:00:00") return "";
 		return getTimeStr(time, format);
 	}
 
-	function qstr(s) {
+	static qstr(s) {
 		if (s == null) return "''";
 		return "'" + ("" + s).replace(/'/g, "''") + "'";
 	}
 
-	function sprintf() {
+	static sprintf() {
 		var arg = arguments,
 			str = arg[0] || '',
 			i, n;
@@ -108,7 +90,7 @@ module.exports = function(Application) {
 		}
 		return str;
 	}
-	function contains(arr,obj){
+	static contains(arr,obj){
 		var i = arr.length;
 		while (i--) {
 			if (arr[i] === obj) {
@@ -118,7 +100,7 @@ module.exports = function(Application) {
 		return false;
 	}
 
-	function generateFilter(obj,colConfig,type="AND"){
+	static generateFilter(obj,colConfig,type="AND"){
 		let _a = [];
 		let	_rt = "";
 		for(let k in obj){
@@ -149,12 +131,12 @@ module.exports = function(Application) {
 		return _rt;
 	}
 	
-	function generateSort(sort,colConfig){
+	static generateSort(sort,colConfig){
 		let orderBy = "";
 		for(let k in sort){
 			if (!colConfig[k]) continue;
 			let _col = colConfig[k]['col'];
-			let _type = sort[k] == "ASC"?"ASC":"DESC";
+			let _type = sort[k] === "ASC"?"ASC":"DESC";
 			if(!_col) continue;
 			orderBy += ","+_col+" "+_type;
 		}
@@ -162,13 +144,18 @@ module.exports = function(Application) {
 		return orderBy;
 	}
 
-	function http_post_q(config, data) {
+	static http_post_q(config, data,https=false) {
 		let {web_host,method="POST",path="/",port="80",content_type='application/json; charset=UTF-8',timeout=4000} = config;
 		// console.log("config",config);
 		// console.log("web_host",web_host);
 		let dfe = Q.defer();
-		let http = require('http');
-		//发送 http Post 请求  
+		let http = null;
+		if(https){
+		 http=require("https")
+    }else{
+      http = require('http');
+    }
+		//发送 http Post 请求
 		var postData = o2s(data);
 		var options = {
 			hostname: web_host,
@@ -207,18 +194,6 @@ module.exports = function(Application) {
 
 		return dfe.promise;
 	}
-
-	return {
-		__filename,
-		writeOperLog,
-		writeAppLog,
-		checkVerify,
-		getTimeStrExt,
-		qstr,
-		sprintf,
-		contains,
-		generateFilter,
-		generateSort,
-		http_post_q
-	}
 }
+
+module.exports = AppTools;

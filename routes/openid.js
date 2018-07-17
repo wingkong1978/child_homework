@@ -8,7 +8,6 @@ router.get('/', function(req, res, next) {
   // res.send( (new teacher()).login_q());
 });
 router.post('/', function(req, res, next) {
-  console.log("post openId",req);
   let parms = req.body;
 
   let parmsO = AppTools.s2o(parms);
