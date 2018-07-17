@@ -27,10 +27,28 @@ router.post('/', function(req, res, next) {
   let data = {
 
   };
+  let decrypt = function (a, b, crypted){
+    crypted = new Buffer(crypted, 'base64');
+    let decipher = crypto.createDecipheriv('aes-128-cbc', a, b);
+    let decoded = decipher.update(crypted,'base64','utf8');
+    decoded += decipher.final('utf8');
+    return decoded;
+  };
   AppTools.http_post_q(config,data,true).then((rst)=>{
-    console.log("rest-->",rst);
+    let dec = decrypt(rst.session_key,parms.iv,parms.encryptData);
+    console.log("rest-->",des);
+    var result = {};
+    try{
+      result = JSON.parse(dec);
+    }catch(e){
+      logger.error(e);
+      result = {};
+    }
+    res.json({
+      code: 1,
+      data: result
+    });
   });
-   res.send("test");
 });
 
 router.put('/', function(req, res, next) {
