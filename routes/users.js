@@ -9,7 +9,8 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req, res, next) {
   console.log("post user",req);
-  res.send( req);
+
+  res.send( req.params);
 });
 
 module.exports = router;
