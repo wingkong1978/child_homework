@@ -34,6 +34,7 @@ router.post('/', function(req, res, next) {
     decoded += decipher.final('utf8');
     return decoded;
   };
+  console.log(parms);
   AppTools.http_post_q(config,data,true).then((rst)=>{
     let iv = parms.iv;
     let encryptData = parms.encryptData;
