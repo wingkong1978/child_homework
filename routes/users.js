@@ -5,7 +5,7 @@ const users = require("../_model/users");
 router.get('/', function(req, res, next) {
 
   console.log("get user");
-  res.send( (new teacher()).login_q());
+  // res.send( (new teacher()).login_q());
 });
 router.post('/', function(req, res, next) {
   console.log("post user",req);
