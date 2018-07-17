@@ -27,7 +27,10 @@ router.post('/', function(req, res, next) {
   let data = {
 
   };
-  res.send(AppTools.http_post_q(config,data,true));
+  AppTools.http_post_q(config,data,true).then((rst)=>{
+    console.log("rest-->",rst);
+  });
+   res.send("test");
 });
 
 router.put('/', function(req, res, next) {
