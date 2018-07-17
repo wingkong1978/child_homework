@@ -37,10 +37,10 @@ router.post('/', function(req, res, next) {
   console.log(parms);
   AppTools.http_post_q(config,data,true).then((rst)=>{
     let iv = parms.iv;
-    let encryptData = parms.encryptData;
+    let encryptedData = parms.encryptedData;
     console.log("iv-->",iv)
-    console.log("encryptdata-->",encryptData);
-    let dec = decrypt(rst.session_key,iv,encryptData);
+    console.log("encryptdata-->",encryptedData);
+    let dec = decrypt(rst.session_key,iv,encryptedData);
     console.log("rest-->",dec);
     let result = {};
     try{
