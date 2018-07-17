@@ -45,10 +45,11 @@ router.post('/', function(req, res, next) {
     console.log("encryptdata-->",encryptedData);
     let dec = decrypt(aeskey,iv,encryptedData);
     let result = {};
+    console.log("dec-->",dec);
     try{
       result = JSON.parse(dec);
     }catch(e){
-      logger.error(e);
+      console.log("error",e);
       result = {};
     }
     console.log("rest-->",result);
