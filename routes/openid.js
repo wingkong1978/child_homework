@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const crypto = require("crypto");
 const AppTools = require("../_biz/AppTools");
 //编写执行函数
 router.get('/', function(req, res, next) {
