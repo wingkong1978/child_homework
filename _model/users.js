@@ -6,4 +6,8 @@ class users extends DBMysql{
   saveUserInfo(){
 
   }
+
+  weixinLogin(){
+    
+  }
 }
