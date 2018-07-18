@@ -50,7 +50,8 @@ router.post('/', function(req, res, next) {
     };
 
     (new OrmUser()).upsert(parm,true)
-    then((rst)=>{
+      .then((rst)=>{
+      console.log("rst-->",rst);
       res.json(
         data
       );
