@@ -113,9 +113,9 @@ class OrmBase extends DbMysql
 		return  _this.select_q(sql);
 	}
 	upsert(param,flag_new = true){
-		console.log("1")
 
 		var table=this.NAME_R;//by Children
+    console.log("1-->",table);
 		var field_a = this.field_a;
 		let _this = this;
 
