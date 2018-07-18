@@ -15,3 +15,5 @@ class OrmUser extends OrmBase{
     ]
   }
 }
+
+module.exports=OrmUser;
