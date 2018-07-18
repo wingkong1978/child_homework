@@ -2,8 +2,9 @@ const mysql=require('mysql');
 const tools = require("./tools");
 const Q = require("q");
 const config = require('../_conf/config');
+const AppTools = require("../_biz/AppTools");
 var _pool=null;
-var debug=null;
+// var debug=null;
 function qstr(s){ if(s==null) return "''"; return "'"+(""+s).replace(/'/g,"''")+"'"; }
 function qstr_arr(a){ var rt_a=[]; for(var k in a){ rt_a.push(qstr(a[k])); } return rt_a.join(',') }
 class DbMysql 
@@ -43,9 +44,9 @@ class DbMysql
 				if(!!err){dfr.reject(err)}
 				return;
 			}
-			logger.log('TMP DBG sql=',sql);
+			// logger.log('TMP DBG sql=',sql);
 			conn.query(sql, binding, function(err, rst) {
-				logger.log("main process?==",process.mainFlag);
+				// logger.log("main process?==",process.mainFlag);
 				if(process.mainFlag===undefined)
           conn.destroy();
 				else{
@@ -64,7 +65,7 @@ class DbMysql
 
 	//p=>{table,toUpdate,toFind,insert_first,db}
 	findAndUpsert_q(q){
-		var {Q,logger,s2o,isOK,debug}=Application;
+		// var {Q,logger,s2o,isOK,debug}=Application;
 		var {table,toUpdate,toFind,insert_first,db}=q;
 		var s_kv="",a_kv=[],
 			s_w="",a_w=[],
@@ -111,8 +112,8 @@ WHERE NOT EXISTS (SELECT 'Y' FROM ${table} ${where} LIMIT 1)`;
 						})
 				})
 				.fail(err=>{
-					if(debug>0)
-						logger.log('DEBUG findAndUpsert_q.err=',err,sql_1,sql_2);
+					// if(debug>0)
+					// 	logger.log('DEBUG findAndUpsert_q.err=',err,sql_1,sql_2);
 					return Q.reject(err)
 				})
 		}else{
@@ -131,8 +132,8 @@ WHERE NOT EXISTS (SELECT 'Y' FROM ${table} ${where} LIMIT 1)`;
 					}
 				})
 				.fail(err=>{
-					if(debug>0)
-						logger.log('DEBUG findAndUpsert_q.err=',err,sql_1,sql_2);
+					// if(debug>0)
+					// 	logger.log('DEBUG findAndUpsert_q.err=',err,sql_1,sql_2);
 					return Q.reject(err)
 				})
 		}
