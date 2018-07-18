@@ -49,13 +49,18 @@ router.post('/', function(req, res, next) {
       use_province:province
     };
 
-    (new OrmUser()).upsert(parm,true)
-      .then((rst)=>{
-      console.log("rst-->",rst);
-      res.json(
-        data
-      );
-    })
+    try {
+
+      (new OrmUser()).upsert(parm, true)
+        .then((rst) => {
+          console.log("rst-->", rst);
+          res.json(
+            data
+          );
+        })
+    }catch (e){
+      console.log("error-->",e);
+    }
   });
 });
 
