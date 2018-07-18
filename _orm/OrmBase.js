@@ -126,10 +126,10 @@ class OrmBase extends DbMysql
 
 		if(flag_new){
 			param["status"] || (param["status"] = 0);
-			param["create_time"] = getTimeStr();
+			param["create_time"] = AppTools.getTimeStr();
 		}
 
-		param["lmt"] = getTimeStr();
+		param["lmt"] = AppTools.getTimeStr();
 		if(id){
 			let sql = `SELECT id FROM ${table} WHERE id = ` + qstr(id);
 			_this.select_q(sql)
