@@ -38,7 +38,6 @@ class OrmBase extends DbMysql
 	//});
 	//NOTES: 第二参数还有个作用，就是如果 有 pageNumber和pageSize时，max非正数的话还会跳过计算记录总数，这样能让翻页计算快很多（和少了一个 sql）.
 	pageExecute(param, max=999){
-		var {Q,logger,s2o,o2s,isOK} = AppTools;
 		let _this = this;
 
 		let select_s = "SELECT *";
@@ -90,7 +89,7 @@ class OrmBase extends DbMysql
 			if (paramageNumber > 0 && paramageSize > 0 && max>0){
 				let sql = `SELECT COUNT(*) AS total ${from_s} ${where_s} ${group_s}`;
 				return _this.select_q(sql,binding).then(rst=>{
-					if(!isOK(rst)) return rst;
+					if(!AppTools.isOK(rst)) return rst;
 					let total = rst.rows[0]["total"];
 					rt["maxRowCount"]=total;
 					rt["total"]=total;
@@ -115,9 +114,7 @@ class OrmBase extends DbMysql
 	}
 	upsert(param,flag_new = true){
 		console.log("1")
-		var {Q,logger,s2o,o2s,isOK,getTimeStr} = AppTools;
 
-		console.log("2--->",Q);
 		var table=this.NAME_R;//by Children
 		var field_a = this.field_a;
 		let _this = this;
@@ -137,7 +134,7 @@ class OrmBase extends DbMysql
 			let sql = `SELECT id FROM ${table} WHERE id = ` + qstr(id);
 			_this.select_q(sql)
 				.then(function(rst){
-					if(!isOK(rst)) dfe.reject(rst);
+					if(!AppTools.isOK(rst)) dfe.reject(rst);
 					let rows = rst.rows;
 					if(rows.length>0){
 						let update_str = [];
@@ -149,7 +146,7 @@ class OrmBase extends DbMysql
 
 						let sql = `UPDATE ${table} SET ` + update_str.join(",") + " WHERE id = " + qstr(id);
 						 _this.exec_q(sql).then(function(rst){
-							if(!isOK(rst)) dfe.reject(rst);
+							if(!AppTools.isOK(rst)) dfe.reject(rst);
 							if(rst.af > 0)
 								dfe.resolve({"STS":"OK","lastID":id});
 							else
@@ -177,7 +174,7 @@ class OrmBase extends DbMysql
 		}
 
 		return dfe.promise.then(function(rst){
-			if(isOK(rst))
+			if(AppTools.isOK(rst))
 				return rst;
 
 			let insert_str = [];
@@ -191,18 +188,18 @@ class OrmBase extends DbMysql
 			}
 			let sql = `INSERT INTO ${table} (` + field_s.join(",") + ") VALUE (" + value_s.join(",") + ")";
 			return  _this.exec_q(sql).then(function(rst){
-				if(!isOK(rst)) return rst;
+				if(!AppTools.isOK(rst)) return rst;
 				return {"STS":"OK","lastID":rst.lastID};
 			});
 		},function(err){
-			return {"STS":"KO","errmsg":o2s(err)};
+			return {"STS":"KO","errmsg":AppTools.o2s(err)};
 		});
 	}
 
 	insert(param, flag_just_id = false){
 		let _this = this;
 		return _this.upsert(param, true).then(function(rst){
-			if(!isOK(rst))
+			if(!AppTools.isOK(rst))
 				return rst;
 			if(flag_just_id) return {"STS":"OK","id":rst.lastID};
 
@@ -217,25 +214,23 @@ class OrmBase extends DbMysql
 	}
 
 	update(param, flag_just_id = true){
-		var {o2s,isOK} = AppTools;
 		let _this = this;
 		return _this.upsert(param, false).then(function(rst){
-			if(!isOK(rst))
+			if(!AppTools.isOK(rst))
 				return rst;
 			if(flag_just_id) return {"STS":"OK","id":rst.lastID};
 
 			return _this.loadOne(rst.lastID).then(rst=>{
-				if(!isOK(rst))
+				if(!AppTools.isOK(rst))
 					return rst;
 				return {"STS":"OK","row":rst.rows[0]};
 			});
 		},function(err){
-			return {"STS":"KO","errmsg":o2s(err)};
+			return {"STS":"KO","errmsg":AppTools.o2s(err)};
 		});
 	}
 
 	markDelete(id){
-		var {o2s} = AppTools;
 		let table=this.NAME_R;//by Children
 		let _this = this;
 
@@ -253,7 +248,7 @@ class OrmBase extends DbMysql
 		return _this.exec_q(sql).then(function(rst){
 			return rst;
 		},function(err){
-			return {"STS":"KO","errmsg":o2s(err)};
+			return {"STS":"KO","errmsg":AppTools.o2s(err)};
 		});
 	}
 	//	select(){

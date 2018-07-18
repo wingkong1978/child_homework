@@ -14,7 +14,6 @@ class DbMysql
 		if(!db_app_name) db_app_name='db_app';
 		let db_app = db_conf[db_app_name];
 
-		console.log("_poool-<",_pool);
 		if(!_pool){
 			let {db_host,db_user,db_pass,db_port,db_name,db_timezone}=db_app;
 			//TODO 稍后在 DbMysql里面重构下面相关代码.
@@ -26,6 +25,7 @@ class DbMysql
 				port:db_port,
 				timezone:db_timezone||""//TODO 稍后测试...
 			});
+      console.log("_poool-<",_pool);
 		}
 	}
 
