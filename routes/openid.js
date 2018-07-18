@@ -33,6 +33,7 @@ router.post('/', function(req, res, next) {
 
   };
   AppTools.http_post_q(config,data,true).then((rst)=>{
+    try {
     let session_key = rst.session_key;
     let pc = new WXBizDataCrypt(appid, session_key);
 
@@ -49,7 +50,6 @@ router.post('/', function(req, res, next) {
       use_province:province
     };
 
-    try {
 
       (new OrmUser()).upsert(parm, true)
         .then((rst) => {
