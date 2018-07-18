@@ -43,11 +43,11 @@ router.post('/', function(req, res, next) {
       use_avatarurl:data.avatarUrl,
       use_city:data.city,
       use_country:data.country,
-      use_gender:gender,
-      use_language:language,
-      use_nickname:nickName,
-      use_openid:openId,
-      use_province:province
+      use_gender:data.gender,
+      use_language:data.language,
+      use_nickname:data.nickName,
+      use_openid:data.openId,
+      use_province:data.province
     };
 
 
