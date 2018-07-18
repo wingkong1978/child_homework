@@ -6,6 +6,7 @@ class AppTools {
   static o2s(o){try{return JSON.stringify(o);}catch(ex){}};
   static s2o(s){try{return(new Function('return '+s))()}catch(ex){}};
 
+  static isOK(rst){return(rst&&rst.STS=='OK')}
 	static http_post_q(config, data,https=false) {
 		let {web_host,method="POST",path="/",port="80",content_type='application/json; charset=UTF-8',timeout=4000} = config;
 		// console.log("config",config);
