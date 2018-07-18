@@ -3,6 +3,7 @@ var router = express.Router();
 const AppTools = require("../_biz/AppTools");
 const WXBizDataCrypt = require("../_biz/WXBizDataCrypt");
 
+const OrmUser = require("../_orm/OrmUser");
 //编写执行函数
 router.get('/', function(req, res, next) {
 
