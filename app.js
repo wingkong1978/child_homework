@@ -16,6 +16,7 @@ var fileupload = require('./routes/fileupload');
 var teacher = require('./routes/teacher');
 var users = require('./routes/users');
 let openid = require('./routes/openid');
+let test = require('./routes/test');
 var app = express();
 
 // 模板开始
@@ -40,6 +41,7 @@ app.use('/fileupload', fileupload);
 app.use('/teachers', teacher);
 app.use('/users', users);
 app.use('/openid', openid);
+app.use('/test', test);
 // app.use('/search', users);//查
 // app.use('/add', add);//增
 // app.use('/edit', edit);//改

@@ -115,7 +115,6 @@ class OrmBase extends DbMysql
 	upsert(param,flag_new = true){
 
 		var table=this.NAME_R;//by Children
-    console.log("1-->",table);
 		var field_a = this.field_a;
 		let _this = this;
 
@@ -130,8 +129,10 @@ class OrmBase extends DbMysql
 		}
 
 		param["lmt"] = AppTools.getTimeStr();
+    console.log("1-->",param);
 		if(id){
 			let sql = `SELECT id FROM ${table} WHERE id = ` + qstr(id);
+      console.log(field_a);
 			_this.select_q(sql)
 				.then(function(rst){
 					if(!AppTools.isOK(rst)) dfe.reject(rst);
@@ -183,9 +184,13 @@ class OrmBase extends DbMysql
 			for(var k in param){
 				if(field_a.indexOf(k) == "-1") continue;
 				let v = param[k];
+				console.log(v);
 				field_s.push(k);
 				value_s.push(qstr(v));
 			}
+
+      console.log(field_s);
+      console.log(value_s);
 			let sql = `INSERT INTO ${table} (` + field_s.join(",") + ") VALUE (" + value_s.join(",") + ")";
 			return  _this.exec_q(sql).then(function(rst){
 				if(!AppTools.isOK(rst)) return rst;

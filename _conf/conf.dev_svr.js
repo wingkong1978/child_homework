@@ -3,11 +3,11 @@ module.exports = {
 	db_conf:{
 		db_app:{
 			db_type:'mysql',
-			db_host: 'saeacedemo.mysql.rds.aliyuncs.com',
-			db_user: 'stockapidev',
-			db_pass: 'Stock1234',
-			db_name:'stockapidev',
-			db_port: 3306
+			db_host: 'gz-cdb-bd5w58q3.sql.tencentcdb.com',
+			db_user: 'wingkong',
+			db_pass: 'qazWSX12',
+			db_name:'assign_homework',
+			db_port: 62337
 		}
 		//db_app:{
 		//	db_type:'sqlite3',//DbSqlite3
