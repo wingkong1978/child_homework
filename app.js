@@ -37,6 +37,9 @@ app.use('/', index);
 app.use('/testupload', (req,res)=>{
   res.render('testupload.html');
 });
+app.use('/upload', (req,res)=>{
+  res.render('upload.html');
+});
 app.use('/fileupload', fileupload);
 app.use('/teachers', teacher);
 app.use('/users', users);
