@@ -15,4 +15,4 @@ class OrmAnnouncement extends OrmBase{
   }
 }
 
-module.exports=OrmSchool;
+module.exports=OrmAnnouncement;
