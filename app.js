@@ -19,6 +19,7 @@ let openid = require('./routes/openid');
 let test = require('./routes/test');
 let schools = require('./routes/schools');
 let classes = require('./routes/classes');
+let announcements = require('./routes/announcements');
 var app = express();
 
 // 模板开始
@@ -47,6 +48,7 @@ app.use('/teachers', teacher);
 app.use('/schools', schools);
 app.use('/classes', classes);
 app.use('/users', users);
+app.use('/announcements', announcements);
 app.use('/openid', openid);
 app.use('/test', test);
 // app.use('/search', users);//查
