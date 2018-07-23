@@ -14,10 +14,12 @@ router.post('/', function(req, res, next) {
 
   let parms = req.body;
 
-
   let ormClass = new OrmClass();
+  let classname = parms.classname;
+  let schoolid =parms.schoolid;
   let parm={
-    cla_name:params.classname,
+    cla_name:classname,
+    cla_school_id:schoolid
   };
 
   ormClass.upsert(parm,true)
