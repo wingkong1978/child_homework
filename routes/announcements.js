@@ -9,7 +9,14 @@ router.get('/', function(req, res, next) {
       res.json(rst);
     });
 });
-
+router.get('/classes/:classid', function(req, res, next) {
+  let classid = req.params.classid;
+  let ormAnnouncement= new OrmAnnouncement();
+  ormAnnouncement.searchList({ann_class_id:classid})
+    .then((rst)=>{
+      res.json(rst);
+    });
+});
 router.post('/', function(req, res, next) {
 
   let parms = req.body;
