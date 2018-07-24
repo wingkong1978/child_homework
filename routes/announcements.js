@@ -40,6 +40,8 @@ router.post('/', function(req, res, next) {
 
 
 
+  try{
+
   ormAnnouncement.upsert(parm,true)
     .then((rst)=>{
       console.log(rst);
@@ -50,13 +52,16 @@ router.post('/', function(req, res, next) {
       };
       for(let i = 0,len = imageFiles.length;i<len;i++){
         imgParm.imf_path = imageFiles[i];
-        promiseA.push(ormImageFile.upsert(imageParm,true));
+        promiseA.push(ormImageFile.upsert(imgParm,true));
       }
       Q.all(promiseA)
         .then((rst)=>{
           res.json(rst);
         });
     })
+  }catch (e){
+    console.log("errrrrrr",e);
+  }
 });
 
 module.exports = router;
