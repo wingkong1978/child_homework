@@ -17,10 +17,11 @@ router.post('/', function(req, res, next) {
       res.end("invalid request: " + err.message);
       return;
     }
-    res.writeHead(200, {'content-type': 'text/plain'});
-    res.write('received fields:\n\n '+util.inspect(fields));
-    res.write('\n\n');
+    // res.writeHead(200, {'content-type': 'text/plain'});
+    // res.write('received fields:\n\n '+util.inspect(fields));
+    // res.write('\n\n');
 
+    console.log(files);
     let tmpFilePath = files.path;
     console.log("tmpFilePath-->",tmpFilePath);
     let tmpFilePatha= tmpFilePath.split("/").reverse();
