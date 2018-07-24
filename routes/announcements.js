@@ -17,6 +17,7 @@ router.get('/:annc_id', function(req, res, next) {
   let modelAnnouncement= new ModelAnnouncement();
   modelAnnouncement.getAnnouncementDetail(anncId)
     .then((rst)=>{
+    console.log("rrrr->",rst);
       res.json(rst);
     });
 });
