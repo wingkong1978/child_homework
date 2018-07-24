@@ -12,6 +12,7 @@ class ModelAnnouncement {
         let rows = rst.rows;
         let rtn = {};
         for(let i=0,len=rows.length;i<len;i++){
+          console.log("rowss-->",rows[i]);
           rtn['id']=rows[i]['id'];
           rtn['ann_class_id']=rows[i]['ann_class_id'];
           rtn['ann_title']=rows[i]['ann_title'];
