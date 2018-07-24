@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const OrmAnnouncement = require("../_orm/OrmAnnouncement");
 const OrmImageFile = require("../_orm/OrmImageFile");
+const Q = require("q");
 //编写执行函数
 router.get('/', function(req, res, next) {
   let ormAnnouncement= new OrmAnnouncement();
