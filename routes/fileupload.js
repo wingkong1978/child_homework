@@ -30,7 +30,7 @@ router.post('/', function(req, res, next) {
     let todayImagePath = imagePath+"/"+today +"/";
     fs.access(todayImagePath,fs.constants.R_OK,(err)=>{
       if(err){
-        fs.mkdir(todayImagePath,(rst)=>{
+        fs.mkdir(todayImagePath,(err)=>{
           if(err)
             throw  err;
           fs.copy(tmpFilePath,todayImagePath+tmpFilePatha[0],(err)=>{
