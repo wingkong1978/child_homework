@@ -22,6 +22,7 @@ router.post('/', function(req, res, next) {
     res.write('\n\n');
 
     let tmpFilePath = files.path;
+    console.log("tmpFilePath-->",tmpFilePath);
     let tmpFilePatha= tmpFilePath.split("/").reverse();
     let imagePath = "../_files/images";
     let today = AppTools.getToday();
