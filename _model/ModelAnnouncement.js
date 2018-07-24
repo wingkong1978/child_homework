@@ -11,6 +11,7 @@ class ModelAnnouncement {
         console.log("sql-result->",rst);
         let rows = rst.rows;
         let rtn = {};
+        let imgFiles = [];
         for(let i=0,len=rows.length;i<len;i++){
           console.log("rowss-->",rows[i]);
           rtn['id']=rows[i]['id'];
@@ -19,10 +20,9 @@ class ModelAnnouncement {
           rtn['ann_details']=rows[i]['ann_details'];
           rtn['ann_create_user']=rows[i]['ann_create_user'];
           rtn['create_time']=rows[i]['create_time'];
-          rtn['imagefiles'][i]={
-            imgPath:rows[i]['imf_path']
-          }
+          imgFiles.push(rows[i]['imf_path']);
         }
+        rtn['imgFiles']=imgFiles;
 
         console.log("rtn-->",rtn);
         return rtn;
