@@ -28,6 +28,7 @@ router.post('/', function(req, res, next) {
     let imagePath = __dirname+ "/../_files/_images";
     let today = AppTools.getToday();
     let todayImagePath = imagePath+"/"+today +"/";
+    let imgPath = "_images/"+today + "/"+tmpFilePatha[0];
     fs.access(todayImagePath,fs.constants.R_OK,(err)=>{
       if(err){
         fs.mkdir(todayImagePath,(err)=>{
@@ -35,13 +36,13 @@ router.post('/', function(req, res, next) {
             throw  err;
           fs.copyFile(tmpFilePath,todayImagePath+tmpFilePatha[0],(err)=>{
             if(err) console.log("copy file error=>",err);
-            res.end('received files:\n\n '+todayImagePath+tmpFilePatha[0]);
+            res.json({imgPath:imgPath});
           })
         })
       }else{
         fs.copyFile(tmpFilePath,todayImagePath+tmpFilePatha[0],(err)=>{
           if(err) console.log("copy file error=>",err);
-          res.end('received files:\n\n '+todayImagePath+tmpFilePatha[0]);
+          res.json({imgPath:imgPath});
         })
       }
     });
