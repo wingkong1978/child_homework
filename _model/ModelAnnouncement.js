@@ -1,5 +1,5 @@
 const OrmAnnouncement  = require("../_orm/OrmAnnouncement");
-class modelAnnouncement {
+class ModelAnnouncement {
   getAnnouncementDetail(id) {
     let ormAnnouncement = new OrmAnnouncement();
     let sql = "SELECT ann.*, imf.`imf_path` FROM t_announcement ann LEFT JOIN t_image_files imf ON ann.id = imf.`imf_annc_id`";
@@ -11,3 +11,4 @@ class modelAnnouncement {
       })
   }
 }
+module.exports=ModelAnnouncement;

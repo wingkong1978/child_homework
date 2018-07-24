@@ -2,11 +2,20 @@ const express = require('express');
 const router = express.Router();
 const OrmAnnouncement = require("../_orm/OrmAnnouncement");
 const OrmImageFile = require("../_orm/OrmImageFile");
+const ModelAnnouncement = require("../_model/ModelAnnouncement");
 const Q = require("q");
 //编写执行函数
 router.get('/', function(req, res, next) {
   let ormAnnouncement= new OrmAnnouncement();
   ormAnnouncement.searchList()
+    .then((rst)=>{
+      res.json(rst);
+    });
+});
+router.get('/:annc_id', function(req, res, next) {
+  let anncId = req.params.annc_id;
+  let modelAnnouncement= new ModelAnnouncement();
+  modelAnnouncement.getAnnouncementDetail(anncId)
     .then((rst)=>{
       res.json(rst);
     });
