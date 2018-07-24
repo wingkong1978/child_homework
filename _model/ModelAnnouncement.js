@@ -20,7 +20,7 @@ class ModelAnnouncement {
           rtn['ann_create_user']=rows[i]['ann_create_user'];
           rtn['create_time']=rows[i]['create_time'];
           rtn['imagefiles'][i]={
-            imgPath:rows[i].imf_path
+            imgPath:rows[i]['imf_path']
           }
         }
 
