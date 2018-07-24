@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
   let anncTitle =parms.anncTitle;
   let anncDetails= parms.anncDetails;
   let anncCreateUser = parms.anncCreateUser;
-  let imageFiles = params.imagefiles;
+  let imageFiles = parms.imagefiles;
   console.log(imageFiles);
   let parm={
     ann_class_id:classId,
