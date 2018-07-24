@@ -12,6 +12,11 @@ class AppTools {
     if(!fmt)fmt='YYYY-MM-DD HH:mm:ss.SSS';
     return moment(dt).format(fmt);
   };
+  static getToday(dt,fmt){
+    if(!dt)dt=new Date();
+    if(!fmt)fmt='YYYY-MM-DD';
+    return moment(dt).format(fmt);
+  };
   static isOK(rst){return(rst&&rst.STS=='OK')}
 	static http_post_q(config, data,https=false) {
 		let {web_host,method="POST",path="/",port="80",content_type='application/json; charset=UTF-8',timeout=4000} = config;
