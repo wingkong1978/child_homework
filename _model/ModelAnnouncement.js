@@ -18,11 +18,12 @@ class ModelAnnouncement {
           rtn['ann_details']=rows[i]['ann_details'];
           rtn['ann_create_user']=rows[i]['ann_create_user'];
           rtn['create_time']=rows[i]['create_time'];
-          rtn['iamgefiles'][i]={
+          rtn['imagefiles'][i]={
             imgPath:rows[i].imf_path
           }
         }
 
+        console.log("rtn-->",rtn);
         return rtn;
       })
   }
