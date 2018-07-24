@@ -33,13 +33,13 @@ router.post('/', function(req, res, next) {
             throw  err;
           fs.copy(tmpFilePath,todayImagePath+tmpFilePatha[0],(err)=>{
             if(err) console.log("copy file error=>",err);
-            res.end('received files:\n\n '+util.inspect(files));
+            res.end('received files:\n\n '+todayImagePath+tmpFilePatha[0]);
           })
         })
       }else{
         fs.copy(tmpFilePath,todayImagePath+tmpFilePatha[0],(err)=>{
           if(err) console.log("copy file error=>",err);
-          res.end('received files:\n\n '+util.inspect(files));
+          res.end('received files:\n\n '+todayImagePath+tmpFilePatha[0]);
         })
       }
     });
