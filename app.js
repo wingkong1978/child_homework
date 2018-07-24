@@ -51,6 +51,7 @@ app.use('/users', users);
 app.use('/announcements', announcements);
 app.use('/openid', openid);
 app.use('/test', test);
+app.use(express.static('_files'));
 // app.use('/search', users);//查
 // app.use('/add', add);//增
 // app.use('/edit', edit);//改
