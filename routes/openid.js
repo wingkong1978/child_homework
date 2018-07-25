@@ -40,7 +40,6 @@ router.post('/', function(req, res, next) {
     let data = pc.decryptData(encryptedData, iv);
 
     let parm = {
-      id:1,
       use_avatarurl:data.avatarUrl,
       use_city:data.city,
       use_country:data.country,
