@@ -65,6 +65,7 @@ router.post('/', function(req, res, next) {
         if(rst>0){
           parm.id = rst;
         }
+        console.log("parm-->",parm);
         orm.upsert(parm, true)
           .then((rst) => {
             console.log("rst-->", rst);
