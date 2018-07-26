@@ -50,14 +50,28 @@ router.post('/', function(req, res, next) {
       use_province:data.province
     };
 
+    let ormUser = new OrmUser();
+    ormUser.searchList({use_openid:data.openId})
+      .then((rst)=>{
+      let id = 0;
+        if(rst.STS==="OK" &&rts.rows.length>0){
+          id = rts.rows[0].id;
+        }
+        return id;
 
-      (new OrmUser()).upsert(parm, true)
-        .then((rst) => {
-          console.log("rst-->", rst);
-          res.json(
-            data
-          );
-        })
+      })
+      .then((rst)=>{
+        if(rst>0){
+          parm.id = rst;
+        }
+        orm.upsert(parm, true)
+          .then((rst) => {
+            console.log("rst-->", rst);
+            res.json(
+              data
+            );
+          })
+      })
     }catch (e){
       console.log("error-->",e);
     }
