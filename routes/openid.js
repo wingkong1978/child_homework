@@ -53,14 +53,15 @@ router.post('/', function(req, res, next) {
     let ormUser = new OrmUser();
     ormUser.searchList({use_openid:data.openId})
       .then((rst)=>{
+      console.log("find user-->",rst);
       let id = 0;
         if(rst.STS==="OK" &&rts.rows.length>0){
           id = rts.rows[0].id;
         }
         return id;
-
       })
       .then((rst)=>{
+      console.log("user id-->",rst);
         if(rst>0){
           parm.id = rst;
         }
