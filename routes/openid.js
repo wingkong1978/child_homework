@@ -55,8 +55,8 @@ router.post('/', function(req, res, next) {
       .then((rst)=>{
       console.log("find user-->",rst);
       let id = 0;
-        if(rst.STS==="OK" &&rts.rows.length>0){
-          id = rts.rows[0].id;
+        if(rst.STS==="OK" &&rst.rows.length>0){
+          id = rst.rows[0].id;
         }
         return id;
       })
