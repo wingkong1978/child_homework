@@ -69,6 +69,7 @@ router.post('/', function(req, res, next) {
         ormUser.upsert(parm, true)
           .then((rst) => {
             console.log("rst-->", rst);
+            data.id = rst.lastID;
             res.json(
               data
             );
