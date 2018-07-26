@@ -66,7 +66,7 @@ router.post('/', function(req, res, next) {
           parm.id = rst;
         }
         console.log("parm-->",parm);
-        orm.upsert(parm, true)
+        ormUser.upsert(parm, true)
           .then((rst) => {
             console.log("rst-->", rst);
             res.json(
