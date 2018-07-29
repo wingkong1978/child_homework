@@ -21,6 +21,28 @@ router.get('/:annc_id', function(req, res, next) {
       res.json(rst);
     });
 });
+router.get('/read/:annc_id', function(req, res, next) {
+  let anncId = req.params.annc_id;
+  let modelAnnouncement= new ModelAnnouncement();
+
+  console.log("read announcement ",anncId);
+  modelAnnouncement.getAnnouncementReadList(anncId)
+    .then((rst)=>{
+      res.json(rst);
+    });
+});
+router.post('/:annc_id', function(req, res, next) {
+  let anncId = req.params.annc_id;
+  let parms = req.body;
+  console.log("announcements,parms-->",parms);
+  let {userid} = req.body;
+  let modelAnnouncement= new ModelAnnouncement();
+  modelAnnouncement.updateAnnouncementUserRead(Number(anncId),Number(userid))
+    .then((rst)=>{
+      res.json(rst);
+    });
+});
+
 router.get('/classes/:classid', function(req, res, next) {
   let classid = req.params.classid;
   let ormAnnouncement= new OrmAnnouncement();
