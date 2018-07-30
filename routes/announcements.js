@@ -50,9 +50,11 @@ router.get('/classes/:classid', function(req, res, next) {
   ormAnnouncement.searchList({ann_class_id:classid})
     .then((rst)=>{
       if(rst.STS==="OK"){
-        let datas = rst.rows;
-        for(let i=0,len=datas.length;i<len;i++){
-          datas[i]['create_time']=AppTools.getTimeStr(datas[i]['create_time'],'YYYY-MM-DD HH:mm');
+        for(let i=0,len=rst.rows.length;i<len;i++){
+          console.log(rst.rows[i]['create_time']);
+          let timestr = AppTools.getTimeStr(rst.rows[i]['create_time'],'YYYY-MM-DD HH:mm');
+          rst.rows[i]['create_time']=timestr;
+          console.log(timestr);
         }
       }
       res.json(rst);

@@ -8,7 +8,7 @@ module.exports = {
 			db_pass: 'qazWSX12',
 			db_name:'assign_homework',
 			db_port: 62337,
-      db_timezone:"utc"
+      db_timezone:"utc+8"
 		}
 		//db_app:{
 		//	db_type:'sqlite3',//DbSqlite3
