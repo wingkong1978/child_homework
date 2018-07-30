@@ -1,6 +1,7 @@
 
 const Q = require("q");
 const moment = require('moment-timezone');//for datetime
+moment.tz.setDefault("Asia/Hong_Kong");
 class AppTools {
 
 

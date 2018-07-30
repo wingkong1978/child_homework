@@ -1,5 +1,6 @@
 const OrmAnnouncement  = require("../_orm/OrmAnnouncement");
 const OrmMapUserAnnc = require("../_orm/OrmMapUserAnnc");
+const AppTools = require("../_biz/AppTools");
 class ModelAnnouncement {
   constructor(){
     this.ormAnnouncement = new OrmAnnouncement();
@@ -23,7 +24,7 @@ class ModelAnnouncement {
           rtn['ann_title']=rows[i]['ann_title'];
           rtn['ann_details']=rows[i]['ann_details'];
           rtn['ann_create_user']=rows[i]['ann_create_user'];
-          rtn['create_time']=rows[i]['create_time'];
+          rtn['create_time']=AppTools.getTimeStr(rows[i]['create_time'],'YYYY-MM-DD HH:mm:ss');
           imgFiles.push(rows[i]['imf_path']);
         }
         rtn['imgFiles']=imgFiles;
