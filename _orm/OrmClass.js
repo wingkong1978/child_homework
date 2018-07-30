@@ -6,6 +6,8 @@ class OrmSchool extends OrmBase{
     this.field_a=[
       "cla_name",
       "cla_school_id",
+      "cla_teacher_pwd",
+      "cla_parent_pwd",
       "create_time",
       "status",
       "lmt"

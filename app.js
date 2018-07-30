@@ -21,7 +21,6 @@ let schools = require('./routes/schools');
 let classes = require('./routes/classes');
 let announcements = require('./routes/announcements');
 var app = express();
-
 // 模板开始
 app.set('views', path.join(__dirname, 'views'));//设置视图根目录
 app.engine('html',require('ejs').__express);
@@ -75,6 +74,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+console.log(app.get('env'),process.env.NODE_ENV);
 var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
