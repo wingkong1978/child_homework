@@ -4,6 +4,7 @@ const OrmAnnouncement = require("../_orm/OrmAnnouncement");
 const OrmImageFile = require("../_orm/OrmImageFile");
 const ModelAnnouncement = require("../_model/ModelAnnouncement");
 const Q = require("q");
+const AppTools = require("../_biz/AppTools");
 //编写执行函数
 router.get('/', function(req, res, next) {
   let ormAnnouncement= new OrmAnnouncement();
@@ -48,6 +49,12 @@ router.get('/classes/:classid', function(req, res, next) {
   let ormAnnouncement= new OrmAnnouncement();
   ormAnnouncement.searchList({ann_class_id:classid})
     .then((rst)=>{
+      if(rst.STS==="OK"){
+        let datas = rst.rows;
+        for(let i=0,len=datas.length;i<len;i++){
+          datas[i]['create_time']=AppTools.getTimeStr(datas[i]['create_time'],'YYYY-MM-DD HH:mm');
+        }
+      }
       res.json(rst);
     });
 });
