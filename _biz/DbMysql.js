@@ -45,7 +45,7 @@ class DbMysql
 				return;
 			}
 			// logger.log('TMP DBG sql=',sql);
-			conn.query(sql, binding, function(err, rst) {
+			conn.query(sql, [binding], function(err, rst) {
 				// logger.log("main process?==",process.mainFlag);
 				if(process.mainFlag===undefined)
           conn.destroy();

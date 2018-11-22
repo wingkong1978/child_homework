@@ -20,6 +20,7 @@ let test = require('./routes/test');
 let schools = require('./routes/schools');
 let classes = require('./routes/classes');
 let announcements = require('./routes/announcements');
+let students= require('./routes/students');
 var app = express();
 // 模板开始
 app.set('views', path.join(__dirname, 'views'));//设置视图根目录
@@ -45,6 +46,7 @@ app.use('/upload', (req,res)=>{
 app.use('/fileupload', fileupload);
 app.use('/teachers', teacher);
 app.use('/schools', schools);
+app.use('/students', students);
 app.use('/classes', classes);
 app.use('/users', users);
 app.use('/announcements', announcements);

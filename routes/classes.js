@@ -2,8 +2,10 @@ var express = require('express');
 var router = express.Router();
 const OrmClass = require("../_orm/OrmClass");
 const ModelClass = require("../_model/ModelClass");
+const ModelStudent= require("../_model/ModelStudents");
 const OrmStudent= require("../_orm/OrmStudent");
 const OrmMapStudentUser = require("../_orm/OrmMapStudentUser");
+const AppTools = require("../_biz/AppTools");
 //编写执行函数
 router.get('/', function(req, res, next) {
   let ormClass = new OrmClass();
@@ -28,48 +30,27 @@ router.post('/:classno/relationship', function(req, res, next) {
   let ormStudent = new OrmStudent();
   let classno = req.params.classno;
   let userid = req.body.userid;
-  let studentname = req.body.studentname;
+  // let childnames= req.body.childnames;
+  let childidlist = req.body.childidlist;
   let relationship = req.body.relationshipname;
-  let parm = {
-    stu_class_id :classno,
-    stu_name:studentname,
-    stu_no:0//todo 学生学号
-  };
   let ormMapStudentUser = new OrmMapStudentUser();
   let mapParm = {};
 
-  ormStudent.searchList(parm)
-    .then((rst)=>{
-      console.log("search_student",rst);
-      let studentId = 0;
-      if(rst.rows.length>0){
-       studentId = rst.rows[0].id;
-        mapParm = {
-          msu_student_id:studentId,
-          msu_user_id:userid,
-          msu_relationship:relationship
-        };
-       ormMapStudentUser.upsert(mapParm)
-         .then((rst)=>{
-           res.json(rst) ;
-         })
-      }else{
-        ormStudent.upsert(parm)
-          .then((rst)=>{
-          console.log("student upsert result",rst);
-            studentId = rst.lastID;
-            mapParm = {
-              msu_student_id:studentId,
-              msu_user_id:userid,
-              msu_relationship:relationship
-            };
-            ormMapStudentUser.upsert(mapParm)
-              .then((rst)=>{
-                res.json(rst) ;
-              })
-          })
-      }
-    });
+  //循环小盆友student id 然后插入t_map_student_relationship
+  let parmArr = [];
+  for(let i=0,len=childidlist.length;i<len;i++) {
+    let parm = [0, childidlist[i], userid, relationship, 0, AppTools.getTimeStr(),AppTools.getTimeStr()];
+    parmArr.push(parm);
+  }
+
+  let sql = "insert into t_map_student_user_relationship values ?";
+
+    //todo，下面还没有做好，循环直接插入就是了；
+          ormMapStudentUser.exec_q(sql,parmArr)
+            .then((rst)=>{
+              res.json(rst) ;
+            })
+
 });
 router.get('/:classno/:userid', function(req, res, next) {
   let modelClass = new ModelClass();
@@ -80,7 +61,6 @@ router.get('/:classno/:userid', function(req, res, next) {
       res.json(rst) ;
     });
 });
-
 router.post('/', function(req, res, next) {
 
   let parms = req.body;
